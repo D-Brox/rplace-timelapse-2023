@@ -30,6 +30,29 @@ def get_canvas_frame(urls,x1,y1,x2,y2,output):
     frame = canvas.crop((x1+1500, y1+1000, x2+1500+1, y2+1000+1))
     frame.save(f"{output}/images/{n_image:06}.png")
 
+def optimise_canvas_fetch(x1,y1,x2,y2,urls):
+    areas = [False]*6
+    
+    xy11 = x1,y1
+    xy12 = x1,y2
+    xy21 = x2,y1
+    xy22 = x2,y2
+    for x,y in [xy11,xy12,xy21,xy22]:
+        idx = (x+1500)//1000 + (y+1000)//1000 * 3
+        areas[idx] = True
+
+    if areas[0] and areas[2]:
+        areas[1] = True
+    if areas[3] and areas[5]:
+        areas[4] = True
+    
+    optimal_urls = list(urls)
+    for n,a in enumerate(areas):
+        if not a:
+            optimal_urls[n]=None
+    return optimal_urls
+
+
 def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output,keep):
     if not os.path.exists(f"{output}/images/"):
         os.makedirs(f"{output}/images/")
@@ -42,15 +65,17 @@ def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output,keep):
         for n,urls in enumerate(urls):
             if not os.path.exists(f"{output}/images/{n:06}.png"):
                 n_urls.append((n,urls))
-        total = len(n_urls)
     else:
-        n_urls = enumerate(urls)
-        total = len(urls)
+        n_urls = list(enumerate(urls))
+    
+    for i,(n, urls) in enumerate(n_urls):
+        n_urls[i] = (n,optimise_canvas_fetch(x1,y1,x2,y2,urls))
 
     print("\nFetching frames")
     part = partial(get_canvas_frame,x1=x1,y1=y1,x2=x2,y2=y2,output=output)
+    total = len(n_urls)
     with Pool(16) as pool:
-      list(tqdm(pool.imap(part, n_urls),total=total))
+      list(tqdm(pool.imap(part, n_urls),total = total))
     
     print("\nMerging video")
     stream = ffmpeg.input(f"{output}/images/%06d.png")
