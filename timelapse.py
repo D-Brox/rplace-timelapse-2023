@@ -1,3 +1,4 @@
+#! /bin/env python3
 import argparse
 from functools import partial
 from io import BytesIO
@@ -97,7 +98,7 @@ def main():
     parser.add_argument("--framerate",default=60, type=int,
                         help="Framerate of the video")
     parser.add_argument("--frameskip",default=60, type=int,
-                        help="Seconds passed between r/place canvas frames")
+                        help="Seconds skipped in between r/place canvas frames")
     parser.add_argument("--scale",default=1, type=int,
                         help="Scale of the video output")
     

@@ -30,9 +30,10 @@ optional arguments:
   --framerate FRAMERATE
                         Framerate of the video
   --frameskip FRAMESKIP
-                        Seconds passed between r/place canvas frames
+                        Seconds skipped in between r/place canvas frames
   --scale SCALE         Scale of the video output
-  --out OUT             Output directory for the images and video           
+  --out OUT             Output directory for the images and video
+  --keep                Continue from where it died         
 ```
 
 ## Scraper
