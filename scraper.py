@@ -38,7 +38,6 @@ async def main():
             json=post_data
         )
         res = await raw_res.json()
-        print(res,timestamp)
 
         raw_frames = res["data"]["act"]["data"][0]["data"]["frames"]
         frames = {f["canvasIndex"]: f["url"].split("/")[-1] for f in raw_frames}

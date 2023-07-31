@@ -116,18 +116,6 @@ def main():
         args.start = 1689858232999
     if args.end > 1690320892999:
         args.end = 1690320892999
-
-    # My scraper got blocked before I could scrape all of
-    # the seconds in the canvas history.
-    # I currently have only the urls of 72% the seconds.
-    # Therefore, seconds between frames should be a multiple
-    # of 2 or 5, as I was able to scrape all of those.
-
-    # If you are able to scrape the missing ones, please open a PR.
-    if args.frameskip<2:
-        args.frameskip = 2
-    if args.frameskip%2 and args.frameskip%5:
-        args.frameskip = (args.frameskip//2)*2
     args.start = args.start - (args.start - 1689858232999)%10000
 
     print("Processing timestamps")

@@ -38,9 +38,7 @@ optional arguments:
 
 ## Scraper
 
-The scraper fetchs the endpoints of each second of the r/place canvas history. Unfortunately, I was only able to scrape 72% of the seconds in the total duration of the canvas. But since I scraped every 5 seconds and every 2 seconds, this is enough for most use cases.
-
-In case someone wants to scrape the missing 28%, you can follow these instructions:
+The scraper fetchs the endpoints of each second of the r/place canvas history. In case you want to recreate the `frames.csv` file, you can follow the following steps:
 
 1. Open the r/place canvas history.
 2. Open your browser's devtools using `Ctrl`+`Alt`+`I`
@@ -49,5 +47,3 @@ In case someone wants to scrape the missing 28%, you can follow these instructio
 5. Click on any of the request with the method POST. It will open a menu that shows the request headers.
 6. Copy the token in the header `authorization`. It should start with `ey`.
 7. Paste the token on `headers.py` and run `python scraper.py`
-
-If you are able to scrape what's missing, please open a PR on this repo.
