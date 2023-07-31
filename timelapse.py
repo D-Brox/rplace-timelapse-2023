@@ -58,7 +58,8 @@ def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output,keep):
         stream = ffmpeg.filter(stream, 'scale', f"iw*{scale}",f"ih*{scale}",**{"flags":"neighbor"} )
     stream = ffmpeg.output(stream,f"{output}/timelapse.mp4",**{"c:v":"libx264"},pix_fmt="yuv420p")
     if os.path.exists(f"{output}/timelapse.mp4"):
-        ffmpeg.run(stream)
+        os.remove(f"{output}/timelapse.mp4")
+    ffmpeg.run(stream)
 
 
 def fix_coords(x1,y1,x2,y2):
