@@ -7,7 +7,7 @@ This set of scripts scrapes both the urls and the images from r/place 2023 to ma
 
 ## Timelapse
 
-1. Install the python dependencies with `python -m pip install -r requirements.txt`
+1. Install the python dependencies with `python -m pip install -r requirements.txt`. Make sure you also have `ffmpeg` installed.
 2. Get the top-left and bottom-right coordinates of the area you want on the video.
 3. Get the start and end timestamps. They can be found on the r/place `url`, after the `&ts=`, when looking at the canvas.
 4. Choose the framerate of the video (fps) and the frameskip (seconds passed between each frame). Multiplying both numbers gives us the number of real-life seconds each second on the video represents. By default each second in the video is 1 hour (3600 seconds).
