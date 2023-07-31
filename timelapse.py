@@ -106,14 +106,14 @@ def fix_coords(x1,y1,x2,y2):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("top", type=int,
-                        help="Top canvas coordinates")
-    parser.add_argument("left", type=int,
+    parser.add_argument("left", default = -1500, type=int,
 	                    help="Left canvas coordinates")
-    parser.add_argument("bottom", type=int,
-                        help="Bottom canvas coordinates")
-    parser.add_argument("right", type=int,
+    parser.add_argument("top", default = -1000, type=int,
+                        help="Top canvas coordinates")
+    parser.add_argument("right", default = 1499, type=int,
 	                    help="Right canvas coordinates")
+    parser.add_argument("bottom", default = 999, type=int,
+                        help="Bottom canvas coordinates")
     
     parser.add_argument("--start",default = 1689858232999, type=int,
 	                    help="Timestamp of the first frame")
@@ -135,7 +135,7 @@ def main():
     
     args = parser.parse_args()
 
-    x1,y1,x2,y2 = fix_coords(args.top,args.left,args.bottom,args.right)
+    x1,y1,x2,y2 = fix_coords(args.left,args.top,args.right,args.bottom)
 
     if args.start < 1689858232999:
         args.start = 1689858232999

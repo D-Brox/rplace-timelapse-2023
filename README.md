@@ -15,13 +15,13 @@ This set of scripts scrapes both the urls and the images from r/place 2023 to ma
 ### Usage
 ```
 usage: timelapse.py [-h] [--start START] [--end END] [--framerate FRAMERATE] [--frameskip FRAMESKIP] [--scale SCALE] [--out OUT]
-                    top left bottom right
+                    left top right bottom
 
 positional arguments:
-  top                   Top canvas coordinates
   left                  Left canvas coordinates
-  bottom                Bottom canvas coordinates
+  top                   Top canvas coordinates
   right                 Right canvas coordinates
+  bottom                Bottom canvas coordinates
 
 optional arguments:
   -h, --help            show this help message and exit
