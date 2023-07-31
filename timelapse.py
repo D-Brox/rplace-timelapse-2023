@@ -30,7 +30,7 @@ def get_canvas_frame(urls,x1,y1,x2,y2,output):
     frame = canvas.crop((x1+1500, y1+1000, x2+1500+1, y2+1000+1))
     frame.save(f"{output}/images/{n_image:06}.png")
 
-def optimise_canvas_fetch(x1,y1,x2,y2,urls):
+def optimize_canvas_fetch(x1,y1,x2,y2,urls):
     areas = [False]*6
     
     xy11 = x1,y1
@@ -67,13 +67,14 @@ def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output,keep):
                 n_urls.append((n,urls))
     else:
         n_urls = list(enumerate(urls))
+    total = len(n_urls)
     
-    for i,(n, urls) in enumerate(n_urls):
-        n_urls[i] = (n,optimise_canvas_fetch(x1,y1,x2,y2,urls))
+    print("\nOptimizing the image fetch")
+    for i,(n, urls) in tqdm(enumerate(n_urls),total = total):
+        n_urls[i] = (n,optimize_canvas_fetch(x1,y1,x2,y2,urls))
 
     print("\nFetching frames")
     part = partial(get_canvas_frame,x1=x1,y1=y1,x2=x2,y2=y2,output=output)
-    total = len(n_urls)
     with Pool(16) as pool:
       list(tqdm(pool.imap(part, n_urls),total = total))
     
