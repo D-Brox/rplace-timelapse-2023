@@ -29,17 +29,27 @@ def get_canvas_frame(urls,x1,y1,x2,y2,output):
     frame = canvas.crop((x1+1500, y1+1000, x2+1500+1, y2+1000+1))
     frame.save(f"{output}/images/{n_image:06}.png")
 
-def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output):
+def timelapse(x1,y1,x2,y2,urls,frameskip,framerate,scale,output,keep):
     if not os.path.exists(f"{output}/images/"):
         os.makedirs(f"{output}/images/")
-    else:
+    elif not keep:
         shutil.rmtree(f"{output}/images/")
         os.makedirs(f"{output}/images/")
     
+    if keep:
+        n_urls = []
+        for n,urls in enumerate(urls):
+            if not os.path.exists(f"{output}/images/{n:06}.png"):
+                n_urls.append((n,urls))
+        total = len(n_urls)
+    else:
+        n_urls = enumerate(urls)
+        total = len(urls)
+
     print("\nFetching frames")
     part = partial(get_canvas_frame,x1=x1,y1=y1,x2=x2,y2=y2,output=output)
     with Pool(16) as pool:
-      list(tqdm(pool.imap(part, enumerate(urls)),total = len(urls)))
+      list(tqdm(pool.imap(part, n_urls),total=total))
     
     print("\nMerging video")
     stream = ffmpeg.input(f"{output}/images/%06d.png")
@@ -92,6 +102,9 @@ def main():
     
     parser.add_argument("--out", default="./output",
                         help="Output directory for the images and video")
+    parser.add_argument("--keep", action='store_true',
+                        help="Continue from where it died")
+    parser.set_defaults(keep=False)
     
     args = parser.parse_args()
 
@@ -122,7 +135,7 @@ def main():
         row = df.filter(pl.any_horizontal(pl.col("timestamp") == timestamp))
         frames_urls.append(row.drop("timestamp").rows()[0])
 
-    timelapse(x1, y1, x2, y2, frames_urls, args.frameskip, args.framerate,args.scale, args.out)
+    timelapse(x1, y1, x2, y2, frames_urls, args.frameskip, args.framerate,args.scale, args.out, args.keep)
 
 
 if __name__ == "__main__":
