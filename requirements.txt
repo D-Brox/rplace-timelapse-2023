@@ -1,0 +1,7 @@
+aiohttp
+asyncio
+ffmpeg-python
+pillow
+polars
+requests
+tqdm
