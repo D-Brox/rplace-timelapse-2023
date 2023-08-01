@@ -108,30 +108,30 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("left", default = -1500, type=int,
-	                    help="Left canvas coordinates")
+	                    help="left canvas coordinates")
     parser.add_argument("top", default = -1000, type=int,
-                        help="Top canvas coordinates")
+                        help="top canvas coordinates")
     parser.add_argument("right", default = 1499, type=int,
-	                    help="Right canvas coordinates")
+	                    help="right canvas coordinates")
     parser.add_argument("bottom", default = 999, type=int,
-                        help="Bottom canvas coordinates")
+                        help="bottom canvas coordinates")
     
     parser.add_argument("--start",default = 1689858232999, type=int,
-	                    help="Timestamp of the first frame")
+	                    help="timestamp of the first frame")
     parser.add_argument("--end",default = 1690320892999, type=int,
-	                    help="Timestamp of the last frame")
+	                    help="timestamp of the last frame")
     
     parser.add_argument("--framerate",default=60, type=int,
-                        help="Framerate of the video")
+                        help="framerate of the video")
     parser.add_argument("--frameskip",default=60, type=int,
-                        help="Seconds skipped in between r/place canvas frames")
+                        help="seconds skipped in between r/place canvas frames")
     parser.add_argument("--scale",default=1, type=int,
-                        help="Scale of the video output")
+                        help="scale of the video output")
     
     parser.add_argument("--out", default="./output",
-                        help="Output directory for the images and video")
+                        help="output directory for the images and video")
     parser.add_argument("--keep", action='store_true',
-                        help="Continue from where it died")
+                        help="continue from where the process died")
     parser.set_defaults(keep=False)
     
     args = parser.parse_args()

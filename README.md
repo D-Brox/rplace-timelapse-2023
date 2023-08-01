@@ -1,6 +1,6 @@
 # Reddit r/place 2023 Timelapse Video Maker
 
-**Easily make HD Timelapse videos from Reddit's r/place 2023**
+**Easily make HD Timelapse videos of Reddit's r/place 2023**
 
 This set of scripts scrapes both the urls and the images from r/place 2023 to make custom timelapse videos.
 
@@ -18,22 +18,22 @@ usage: timelapse.py [-h] [--start START] [--end END] [--framerate FRAMERATE] [--
                     left top right bottom
 
 positional arguments:
-  left                  Left canvas coordinates
-  top                   Top canvas coordinates
-  right                 Right canvas coordinates
-  bottom                Bottom canvas coordinates
+  left                  left canvas coordinates
+  top                   top canvas coordinates
+  right                 right canvas coordinates
+  bottom                bottom canvas coordinates
 
 optional arguments:
   -h, --help            show this help message and exit
-  --start START         Timestamp of the first frame
-  --end END             Timestamp of the last frame
+  --start START         timestamp of the first frame
+  --end END             timestamp of the last frame
   --framerate FRAMERATE
-                        Framerate of the video
+                        framerate of the video
   --frameskip FRAMESKIP
-                        Seconds skipped in between r/place canvas frames
-  --scale SCALE         Scale of the video output
-  --out OUT             Output directory for the images and video
-  --keep                Continue from where it died         
+                        seconds skipped in between r/place canvas frames
+  --scale SCALE         scale of the video output
+  --out OUT             output directory for the images and video
+  --keep                continue from where the process died         
 ```
 
 ## Scraper
