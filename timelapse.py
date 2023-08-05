@@ -142,7 +142,7 @@ def main():
         args.start = 1689858232999
     if args.end > 1690320892999:
         args.end = 1690320892999
-    args.start = args.start - (args.start - 1689858232999)%10000
+    args.start = args.start - (args.start - 1689858232999)%1000
 
     print("Processing timestamps")
     df = pl.read_csv("frames.csv")
